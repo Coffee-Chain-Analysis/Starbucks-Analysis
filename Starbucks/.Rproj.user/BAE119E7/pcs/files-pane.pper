@@ -1,0 +1,9 @@
+{
+    "path" : "~/Final_Project_R/Starbucks/data",
+    "sortOrder" : [
+        {
+            "ascending" : true,
+            "columnIndex" : 2
+        }
+    ]
+}
