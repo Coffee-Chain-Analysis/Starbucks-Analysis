@@ -13,24 +13,25 @@ us_states<-map_data("state")
 
 #chaging dataset zip to numeric
 starbuck_zip<-starbuck_zip %>% 
-  mutate(ZIP=as.numeric(ZIP))
+  mutate(ZIP=as.numeric(ZIP)) %>% 
+  distinct(CITY, .keep_all = TRUE)
 
 #filtering by country and renaming
 starbuck_local <- starbuck_local %>% 
   filter(Country == "US") %>% 
   rename(
-    CITY = City
+    CITY = City,
+    STATE = `State/Province`
   )
 
 #joining datasets by city
-data<-left_join(starbuck_zip,starbuck_local,by="CITY")
+data<-left_join(starbuck_local,starbuck_zip,by=c("CITY","STATE"))
 
 #grouping by state and removing na values
 data<- data %>% 
-  group_by(`State/Province`) %>% 
+  group_by(STATE) %>% 
   count() %>%
-  na.omit() %>% 
-  rename(STATE = `State/Province`)
+  na.omit() 
 
 #renaming states to match join function
 us_states<-us_map("states") %>% 
