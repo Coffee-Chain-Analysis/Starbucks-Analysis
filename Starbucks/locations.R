@@ -65,7 +65,7 @@ data %>%
   coord_equal()+
   theme_map()+
   theme(panel.background = element_blank()) + ggtitle("US Starbuck's Location", subtitle = "Average # of Stores") + labs(fill = "Count")+
-  theme(legend.position="bottom", plot.title = element_text(hjust = 0.5),plot.subtitle =  element_text(hjust = 0.5)) +geom_text(data = centroid, mapping = aes(x_avg,y_avg, group = group, label = count), color = "white", inherit.aes = FALSE)+ scale_fill_gradient(low = "orange", high = "purple", guide = guide_legend())
+  theme(legend.position="bottom", plot.title = element_text(hjust = 0.5),plot.subtitle =  element_text(hjust = 0.5)) +geom_text(data = centroid, mapping = aes(x_avg,y_avg, group = group, label = count), color = "black", inherit.aes = FALSE)+ scale_fill_gradient(low = "orange", high = "purple", guide = guide_legend())
 
 
 write_csv(data, "data/StarbuckAvgLocations#1.csv")

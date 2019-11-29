@@ -18,12 +18,16 @@ starbuck_rev <- starbuck_rev %>%
 starbuck_rev <- starbuck_rev %>% 
   group_by(Type, year) %>% 
   summarise(mean = mean(count))
-starbuck_rev %>% 
-  ggplot() + 
-  geom_col(mapping = aes(reorder(year, mean),
-                         y = mean, fill=Type)) + labs(title = "Starbuck's Revenue")+
-  theme(plot.title = element_text(hjust = 0.5)) + xlab("Year") + ylab("Revenue")  +  facet_wrap(~Type, nrow = 3, scales = "free") + coord_flip()
+# starbuck_rev %>% 
+#   ggplot() + 
+#   geom_col(mapping = aes(reorder(year, mean),
+#                          y = mean, fill=Type)) + labs(title = "Starbuck's Revenue")+
+#   theme(plot.title = element_text(hjust = 0.5)) + xlab("Year") + ylab("Revenue")  +  facet_wrap(~Type, nrow = 3, scales = "free") + coord_flip()
 
+starbuck_rev %>%
+group_by(Type) %>%
+  ggplot(mapping = aes(x = year, y = mean)) +
+  geom_line(mapping = aes(color = Type)) + ylab("Revenue") + xlab("Year")+ facet_wrap(~Type, nrow = 3,scales = "free")
 
 write_csv(starbuck_rev, "data/TotalRevenue.csv")
 
@@ -41,12 +45,17 @@ starbuck_rev <- starbuck_rev %>%
 starbuck_rev <- starbuck_rev %>% 
   group_by(Type, year) %>% 
   summarise(mean = mean(count))
-starbuck_rev %>% 
-  ggplot() + 
-  geom_col(mapping = aes(reorder(year, mean),
-                         y = mean, fill=Type)) + labs(title = "Starbuck's Revenue/Country(LS)")+
-  theme(plot.title = element_text(hjust = 0.5)) + xlab("Year") + ylab("Revenue") + scale_fill_brewer(palette = "Set2")  +  facet_wrap(~Type, nrow = 3, scales = "free") + coord_flip()
-  scale_y_continuous(limits = c(0, 20000))
+# starbuck_rev %>% 
+#   ggplot() + 
+#   geom_col(mapping = aes(reorder(year, mean),
+#                          y = mean, fill=Type)) + labs(title = "Starbuck's Revenue/Country(LS)")+
+#   theme(plot.title = element_text(hjust = 0.5)) + xlab("Year") + ylab("Revenue") + scale_fill_brewer(palette = "Set2")  +  facet_wrap(~Type, nrow = 3, scales = "free") + coord_flip()
+#   scale_y_continuous(limits = c(0, 20000))
+
+starbuck_rev %>%
+  group_by(Type) %>%
+  ggplot(mapping = aes(x = year, y = mean)) +
+  geom_line(mapping = aes(color = Type)) + ylab("Revenue") + xlab("Year")+ facet_wrap(~Type, nrow = 3,scales = "free")
 
 
 write_csv(starbuck_rev, "data/revenue(Ls).csv")
@@ -65,11 +74,16 @@ starbuck_rev <- starbuck_rev %>%
 starbuck_rev <- starbuck_rev %>% 
   group_by(Type, year) %>% 
   summarise(mean = mean(count))
-starbuck_rev %>% 
-  ggplot() + 
-  geom_col(mapping = aes(reorder(year, mean),
-                         y = mean, fill=Type)) + labs(title = "Starbuck's Reveue/Country(OS)")+
-  theme(plot.title = element_text(hjust = 0.5)) + xlab("Year") + ylab("Revenue") + scale_fill_brewer(palette = "Set2")  +  facet_wrap(~Type, nrow = 3, scales = "free") + coord_flip()
 
+# starbuck_rev %>% 
+#   ggplot() + 
+#   geom_col(mapping = aes(reorder(year, mean),
+#                          y = mean, fill=Type)) + labs(title = "Starbuck's Reveue/Country(OS)")+
+#   theme(plot.title = element_text(hjust = 0.5)) + xlab("Year") + ylab("Revenue") + scale_fill_brewer(palette = "Set2")  +  facet_wrap(~Type, nrow = 3, scales = "free") + coord_flip()
+
+starbuck_rev %>%
+  group_by(Type) %>%
+  ggplot(mapping = aes(x = year, y = mean, )) +
+  geom_line(mapping = aes(color = Type)) + ylab("Revenue") + xlab("Year")+ facet_wrap(~Type, nrow = 3,scales = "free")
 
 write_csv(starbuck_rev, "data/revenue(Com).csv")
