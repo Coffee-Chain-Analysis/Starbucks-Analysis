@@ -11,8 +11,8 @@ starbuck_rev <- starbuck_rev %>%
   select(year, Company_Operated_Stores:Total_OS)
 
 starbuck_rev <- starbuck_rev %>% 
-  select(Company_Operated_Stores, License_Stores, Other,year) %>% 
-  gather(Type, count, Company_Operated_Stores, License_Stores, Other) %>% 
+  select(Company_Operated_Stores, License_Stores, Other, Total,year) %>% 
+  gather(Type, count, Company_Operated_Stores, License_Stores, Other, Total) %>% 
   na.omit()
 
 starbuck_rev <- starbuck_rev %>% 
@@ -27,7 +27,7 @@ starbuck_rev <- starbuck_rev %>%
 starbuck_rev %>%
 group_by(Type) %>%
   ggplot(mapping = aes(x = year, y = mean)) +
-  geom_line(mapping = aes(color = Type)) + ylab("Revenue") + xlab("Year")+ facet_wrap(~Type, nrow = 3,scales = "free")
+  geom_line(mapping = aes(color = Type)) + ylab("Revenue") + xlab("Year")+ facet_wrap(~Type, nrow = 3,scales = "free") + labs(title = "Starbuck's Revenue")+ theme(plot.title = element_text(hjust = 0.5))
 
 write_csv(starbuck_rev, "data/TotalRevenue.csv")
 
@@ -55,7 +55,8 @@ starbuck_rev <- starbuck_rev %>%
 starbuck_rev %>%
   group_by(Type) %>%
   ggplot(mapping = aes(x = year, y = mean)) +
-  geom_line(mapping = aes(color = Type)) + ylab("Revenue") + xlab("Year")+ facet_wrap(~Type, nrow = 3,scales = "free")
+  geom_line(mapping = aes(color = Type)) + ylab("Revenue") + xlab("Year")+ facet_wrap(~Type, nrow = 3,scales = "free")+ labs(title = "Starbuck's Revenue")+ labs(title = "Starbuck's Revenue/Country(LS)")+
+theme(plot.title = element_text(hjust = 0.5))
 
 
 write_csv(starbuck_rev, "data/revenue(Ls).csv")
@@ -84,6 +85,6 @@ starbuck_rev <- starbuck_rev %>%
 starbuck_rev %>%
   group_by(Type) %>%
   ggplot(mapping = aes(x = year, y = mean, )) +
-  geom_line(mapping = aes(color = Type)) + ylab("Revenue") + xlab("Year")+ facet_wrap(~Type, nrow = 3,scales = "free")
+  geom_line(mapping = aes(color = Type)) + ylab("Revenue") + xlab("Year")+ facet_wrap(~Type, nrow = 3,scales = "free") + labs(title = "Starbuck's Reveue/Country(OS)") + theme(plot.title = element_text(hjust = 0.5))
 
 write_csv(starbuck_rev, "data/revenue(Com).csv")
